@@ -1,6 +1,9 @@
 package RolePlayingGame;
+
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Random;
+
 import RolePlayingGame.Locations.*;
 import RolePlayingGame.Monsters.*;
 
@@ -24,12 +27,12 @@ public class Main {
             System.out.println("What will you do?");
             System.out.println("you may move, search, view party, view map, or end");
             String action = scan.nextLine().toLowerCase();
-            switch(action) {
+            switch (action) {
                 case "move":
                     System.out.println("Which direction?");
                     System.out.println("North, South, East, West");
                     char dir = scan.nextLine().toLowerCase().charAt(0);
-                    switch(dir) {
+                    switch (dir) {
                         case 'n':
                             player.setLoc_y(player.getLoc_y() + 1);
                             break;
@@ -51,7 +54,7 @@ public class Main {
                     String playerLocation = worldMap.getMap()[player.getLoc_y()][player.getLoc_x()];
                     System.out.println(playerLocation);
                     Random random = new Random();
-                    switch(playerLocation) {
+                    switch (playerLocation) {
 
                         case "Forest":
                             Forest forest = new Forest();
@@ -60,7 +63,7 @@ public class Main {
                             System.out.println("You found a wild " + opponent);
                             System.out.println("Fight it? yes/no");
                             char battle = scan.next().toLowerCase().charAt(0);
-                            switch(battle){
+                            switch (battle) {
                                 case 'y':
                                     combat(opponent, player);
                                     break;
@@ -72,21 +75,20 @@ public class Main {
 
 
                 case "view party":
-                    if (player.getTeam().length != 0){
-                        for(int i = 0; i <= player.getTeam().length ; i ++) {
+                    if (player.getTeam().length != 0) {
+                        for (int i = 0; i <= player.getTeam().length; i++) {
 
                             System.out.println(player.getTeam()[i].getName());
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("No monsters in party.");
                     }
                     break;
 
 
                 case "map":
-                    for (int i = 0; i < worldMap.getMap().length; i ++) {
-                        for (int j = 0; j < worldMap.getMap()[i].length; j ++) {
+                    for (int i = 0; i < worldMap.getMap().length; i++) {
+                        for (int j = 0; j < worldMap.getMap()[i].length; j++) {
                             System.out.print(worldMap.getMap()[i][j] + " ");
                         }
                         System.out.print("\n");
@@ -100,13 +102,13 @@ public class Main {
                     break;
             }//end action switch
         }//End game loop
-
         scan.close();
     }//End main
+
     public static void combat(String encounter, Player player) {
         Monster opponent = null;
         Character combatant = null;
-        switch(encounter) {
+        switch (encounter) {
             case "forret":
                 Forret forret = new Forret();
                 opponent = forret;
@@ -115,15 +117,14 @@ public class Main {
 
         try {
             combatant = player.getTeam()[0];
-        }
-        catch(ArrayIndexOutOfBoundsException ex) {
+        } catch (ArrayIndexOutOfBoundsException ex) {
             combatant = player;
         }//end try-catch
 
         System.out.println("Opponent: " + opponent.getName());
         System.out.println("Combatant: " + combatant.getName());
         boolean combat = true;
-        while(combat) {
+        while (combat) {
             if (combatant.getSpeed() <= opponent.getSpeed()) {
                 //OpTurn();
                 PTurn(combatant, opponent);
@@ -131,16 +132,20 @@ public class Main {
             }
         }
     }//end combat
+
     public static void PTurn(Character combatant, Character opponent) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Player turn");
         System.out.println("You can:\nAttack\nBag\nSwitch\nRun");
         char action = scan.nextLine().toLowerCase().charAt(0);
-        switch(action) {
+        switch (action) {
             case 'a':
-
-                combatant.getMoves();
-
+                if (combatant instanceof Monster){
+                    System.out.println(((Monster) combatant).getMoves());
+                } else{
+                    System.out.println("Attacked");
+                    
+                }
         }
     }
 }//End

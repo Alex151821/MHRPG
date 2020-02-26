@@ -10,9 +10,9 @@ import java.util.Random;
 
 public class Monster extends Character {
     protected Random random = new Random();
-
-    public Monster(Map<Move, Integer> moves) {
-        super(moves);
+    Map<Move, Integer> moves = new HashMap<Move, Integer>();
+    protected String type;
+    public Monster() {
         this.base_health = random.nextInt(15);
         this.base_attack = random.nextInt(15);
         this.base_defense = random.nextInt(15);
@@ -24,6 +24,14 @@ public class Monster extends Character {
         this.speed = (((base_speed * 2) * level) / 30) + level + 10;
 
     }
+    public void setMoves(Map<Move, Integer> moves) {
+        this.moves = moves;
+    }
+
+    public Map<Move, Integer> getMoves() {
+        return moves;
+    }
+
 
 
 }

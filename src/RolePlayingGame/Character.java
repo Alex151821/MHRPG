@@ -3,7 +3,7 @@ package RolePlayingGame;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Character {
+public class Character extends Object{
     protected String name;
     protected int base_health;
     protected float health;
@@ -17,11 +17,6 @@ public class Character {
     protected float xp;
     protected int level;
     protected long id;
-    Map<Move, Integer> moves = new HashMap<Move, Integer>();
-
-    public Character(Map<Move, Integer> moves){
-        this.moves = moves;
-    }
 
     public int getDefense() {
         return defense;
@@ -123,13 +118,4 @@ public class Character {
     public void setId(long id) {
         this.id = id;
     }
-
-    public void setMoves(Map<Move, Integer> moves) {
-        this.moves = moves;
-    }
-
-    Map<Move, Integer> getMoves() {
-        return moves;
-    }
-
 }
