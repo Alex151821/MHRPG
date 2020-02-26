@@ -136,11 +136,11 @@ public class Main {
         System.out.println("Player turn");
         System.out.println("You can:\nAttack\nBag\nSwitch\nRun");
         char action = scan.nextLine().toLowerCase().charAt(0);
-       /* switch(action) {
+        switch(action) {
             case 'a':
 
                 combatant.getMoves();
 
-        }*/
+        }
     }
 }//End

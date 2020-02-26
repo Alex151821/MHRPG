@@ -1,7 +1,6 @@
 package RolePlayingGame;
 
 
-
 public class WorldMap {
     String[][] worldMap = {
             {"Forest", "Desert", "Forest"},
@@ -9,7 +8,9 @@ public class WorldMap {
             {"Forest", "Hometown", "Forest"},
             {"Forest", "Forest", "Forest"}};
 
-    WorldMap(){}
+    WorldMap() {
+    }
+
     public String[][] getMap() {
         return worldMap;
     }
