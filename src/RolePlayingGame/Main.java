@@ -1,13 +1,12 @@
 package RolePlayingGame;
 
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Random;
+import java.util.*;
 
 import RolePlayingGame.Locations.*;
 import RolePlayingGame.Monsters.*;
 
 public class Main {
+    static Random rand = new Random();
     public static void main(String[] args) {
         //Game initialization
         Scanner scan = new Scanner(System.in);
@@ -121,14 +120,14 @@ public class Main {
             combatant = player;
         }//end try-catch
 
-        System.out.println("Opponent: " + opponent.getName());
+        System.out.println("Opponent: " + opponent.getName() + "\n\t");
         System.out.println("Combatant: " + combatant.getName());
         boolean combat = true;
         while (combat) {
             if (combatant.getSpeed() <= opponent.getSpeed()) {
                 //OpTurn();
                 PTurn(combatant, opponent);
-                break;
+                OTurn(opponent, combatant);
             }
         }
     }//end combat
@@ -137,14 +136,34 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("Player turn");
         System.out.println("You can:\nAttack\nBag\nSwitch\nRun");
+        float damage;
         char action = scan.nextLine().toLowerCase().charAt(0);
         switch (action) {
             case 'a':
                 if (combatant instanceof Monster){
                     System.out.println(((Monster) combatant).getMoves());
+                    damage = (float) ((((combatant.getLevel() *2)/5)+2)*(combatant.getAttack()/opponent.getDefense())/50)+2;
                 } else{
                     System.out.println("Attacked");
-                    
+                    damage = (float) ((((combatant.getLevel() *2)/5)+2)*(combatant.getAttack()/opponent.getDefense())/50)+2;
+                    opponent.setHealth(opponent.getHealth()-damage);
+                }
+        }
+    }//end Pturn
+    public static void OTurn(Character combatant, Character opponent){
+        float damage;
+        int action = rand.nextInt(1);
+        switch (action){
+            case 0:
+                if (combatant instanceof Monster){
+                    Map<Move, Integer> moves = ((Monster) combatant).getMoves();
+                    Set<Move> moveSet= moves.keySet();
+                    System.out.println(moveSet);
+                    damage = (float) ((((combatant.getLevel() *2)/5)+2)*(combatant.getAttack()/opponent.getDefense())/50)+2;
+                } else{
+                    System.out.println("Attacked");
+                    damage = (float) ((((combatant.getLevel() *2)/5)+2)*(combatant.getAttack()/opponent.getDefense())/50)+2;
+                    opponent.setHealth(opponent.getHealth()-damage);
                 }
         }
     }

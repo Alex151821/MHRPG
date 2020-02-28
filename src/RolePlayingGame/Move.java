@@ -14,5 +14,19 @@ public class Move {
         this.type = types[type];
         this.kind = kinds[kind];
     }
-
+    public String getName(){
+        return name;
+    }
+    public int getDMG(){
+        return dmg;
+    }
+    public String getType(){
+        return type;
+    }
+    public String getKind(){
+        return kind;
+    }
+    public String toString(){
+        return name + ": \n\tDamage:" + dmg + "\n\tType: "+type+"\n\t"+kind;
+    }
 }
